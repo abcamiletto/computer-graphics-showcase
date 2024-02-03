@@ -59,7 +59,9 @@
 		<!-- Two -->
 		<section id="two" class="wrapper alt style2">
 			<section class="spotlight">
-				<div class="image"><img src="images/pic01.jpg" alt="" /></div>
+				<div class="image"><img src="images/bunny_area_light.jpg" alt=""
+						data-hover-image="images/bunny_sphere_emission.jpg" />
+				</div>
 				<div class="content">
 					<h2>Volumetric Rendering</h2>
 					<p>To portray a realistic fog in our scene.</p>
@@ -212,6 +214,45 @@
 	<script src="assets/js/breakpoints.min.js"></script>
 	<script src="assets/js/util.js"></script>
 	<script src="assets/js/main.js"></script>
+
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+			const images = document.querySelectorAll('.spotlight .image img');
+
+			images.forEach(img => {
+				const originalSrc = img.getAttribute('src');
+
+				img.addEventListener('mouseenter', function () {
+					const hoverImage = img.getAttribute('data-hover-image');
+					// Only proceed if data-hover-image attribute exists and is not empty
+					if (hoverImage) {
+						// Fade out
+						img.style.opacity = 0;
+
+						// Wait for the fade out transition, then change the src and fade back in
+						setTimeout(function () {
+							img.setAttribute('src', hoverImage);
+							img.style.opacity = 1;
+						}, 200); // Match the duration of the CSS opacity transition
+					}
+				});
+
+				img.addEventListener('mouseleave', function () {
+					// Only revert if data-hover-image attribute was used
+					if (img.getAttribute('data-hover-image')) {
+						// Fade out
+						img.style.opacity = 0;
+
+						// Wait for the fade out transition, then revert the src and fade back in
+						setTimeout(function () {
+							img.setAttribute('src', originalSrc);
+							img.style.opacity = 1;
+						}, 200); // Match the duration of the CSS opacity transition
+					}
+				});
+			});
+		});
+	</script>
 
 </body>
 
