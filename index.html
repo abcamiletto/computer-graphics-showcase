@@ -217,39 +217,40 @@
 
 	<script>
 		document.addEventListener('DOMContentLoaded', function () {
-			const images = document.querySelectorAll('.spotlight .image img');
+			const imageContainers = document.querySelectorAll('.spotlight .image');
 
-			images.forEach(img => {
+			imageContainers.forEach(container => {
+				const img = container.querySelector('img');
 				const originalSrc = img.getAttribute('src');
+				const hoverImageSrc = img.getAttribute('data-hover-image');
 
-				img.addEventListener('mouseenter', function () {
-					const hoverImage = img.getAttribute('data-hover-image');
-					// Only proceed if data-hover-image attribute exists and is not empty
-					if (hoverImage) {
-						// Fade out
-						img.style.opacity = 0;
+				// Proceed only if the hover image is provided
+				if (hoverImageSrc) {
+					// Create a new img element for the hover image
+					const hoverImg = document.createElement('img');
+					hoverImg.src = hoverImageSrc;
+					hoverImg.style.position = 'absolute';
+					hoverImg.style.left = '0';
+					hoverImg.style.top = '0';
+					hoverImg.style.width = '100%';
+					hoverImg.style.height = '100%';
+					hoverImg.style.opacity = '0';
+					hoverImg.style.transition = 'opacity 0.5s ease-in-out';
 
-						// Wait for the fade out transition, then change the src and fade back in
-						setTimeout(function () {
-							img.setAttribute('src', hoverImage);
-							img.style.opacity = 1;
-						}, 200); // Match the duration of the CSS opacity transition
-					}
-				});
+					// Insert the hover image into the container
+					container.style.position = 'relative';
+					container.insertBefore(hoverImg, img.nextSibling);
 
-				img.addEventListener('mouseleave', function () {
-					// Only revert if data-hover-image attribute was used
-					if (img.getAttribute('data-hover-image')) {
-						// Fade out
-						img.style.opacity = 0;
-
-						// Wait for the fade out transition, then revert the src and fade back in
-						setTimeout(function () {
-							img.setAttribute('src', originalSrc);
-							img.style.opacity = 1;
-						}, 200); // Match the duration of the CSS opacity transition
-					}
-				});
+					// Adjust opacities on hover
+					container.addEventListener('mouseenter', function () {
+						img.style.opacity = '0';
+						hoverImg.style.opacity = '1';
+					});
+					container.addEventListener('mouseleave', function () {
+						img.style.opacity = '1';
+						hoverImg.style.opacity = '0';
+					});
+				}
 			});
 		});
 	</script>
