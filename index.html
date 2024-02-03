@@ -240,7 +240,8 @@
 					hoverImg.style.width = '100%';
 					hoverImg.style.height = '100%';
 					hoverImg.style.opacity = '0';
-					hoverImg.style.transition = 'opacity 0.4s ease-out';
+					img.style.zIndex = '1';
+					hoverImg.style.zIndex = '0';
 
 					// Insert the hover image into the container
 					container.style.position = 'relative';
@@ -248,10 +249,18 @@
 
 					// Adjust opacities on hover
 					container.addEventListener('mouseenter', function () {
+						img.style.transition = 'opacity 0.5s ease-out';
+						hoverImg.style.transition = 'opacity 0.01s ease-out';
+						hoverImg.style.zIndex = '0';
+
 						img.style.opacity = '0';
 						hoverImg.style.opacity = '1';
 					});
 					container.addEventListener('mouseleave', function () {
+						img.style.transition = 'opacity 0.01s ease-out';
+						hoverImg.style.transition = 'opacity 0.5s ease-out';
+						hoverImg.style.zIndex = '2';
+
 						img.style.opacity = '1';
 						hoverImg.style.opacity = '0';
 					});
