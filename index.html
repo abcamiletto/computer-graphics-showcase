@@ -167,10 +167,16 @@
 				</div>
 			</section>
 			<section class="spotlight">
-				<div class="image"><img src="images/pic03.jpg" alt="" /></div>
+				<div class="image"><img src="images/add_shader.png" alt="" /></div>
 				<div class="content">
 					<h2>Add & Mix Materials</h2>
-					<p>To leverage even more Blender materials.</p>
+					<p>Many materials, scenery and objects are readily available in Blender, the tool we used to create our scene. 
+					   Unfortunately, the Lightwave renderer does not support all of the materials like the common AddShader and MixShader. <br />
+					   Although in many cases it is possible to work around this issue by rephrasing everything in a Principled BSDF material,
+					   the results is never exactly as the artist intended.
+					   <br /><br />
+					   The main issue in doing this is the lack of documentation on the exporter plugin: there is no mention that the alpha channel
+					   of the image texture is not exported, and the typing hints are only available here and there.
 				</div>
 			</section>
 
