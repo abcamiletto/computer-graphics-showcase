@@ -90,14 +90,14 @@
 						data-hover-image="images/perspective_ducks.jpg" /></div>
 				<div class="content">
 					<h2>Thin Lens Camera</h2>
-					<p>The thin lens camera is one of the simplest camera models. In contrast to the pinhole model it is already able to simulate
-						depth of field effects, which can add a good amount of realism to a scene.
-						<br /><br />
-						One of the challenges with camera models is that to make them even more realistic seems to require an exponential amount of effort.
-						We tried to implement the realistic camera model from <a href=https://pbr-book.org/3ed-2018/Camera_Models/Realistic_Cameras>PBRT</a>,
-					    but we had to give up on it because of the time constraints of the course.
-						We think that the thin lens camera is a good compromise between realism and effort.
-					</p>
+					<p>The thin lens camera is one of the simplest camera models. In contrast to the pinhole model, it can already simulate
+                        depth of field effects, adding much realism to a scene.
+                        <br /><br />
+                        One of the challenges with camera models is that making them even more realistic requires an exponential amount of effort.
+                        We tried to implement the realistic camera model from <a href=https://pbr-book.org/3ed-2018/Camera_Models/Realistic_Cameras>PBRT</a>,
+                        but we had to give up on it because of the time constraints of the course.
+                        The thin-lens camera is a good compromise between realism and effort.
+                    </p>
 				</div>
 			</section>
 			<section class="spotlight">
@@ -105,13 +105,13 @@
 						data-hover-image="images/bunny_sphere_emission.jpg" /></div>
 				<div class="content">
 					<h2>Area Lights</h2>
-					<p>Area lights are a way to use shapes as light sources, which can bring benefits in terms of more realistic shadows
-					   and noise reduction. The sun you see reflected on the helmet of the astronaut is a spherical area light.
-					   <br /><br />
-					   Our naive implementation of spherical area lights consisted of sampling random points on the sphere, which 
-					   resulted in a lot of noise, as half of the samples are usually on the non visible hemisphere. 
-					   We then implemented cosine hemisphere based importance sampling, which improved the quality of the images by a lot.
-					</p>
+                    <p>Area lights are a way to use shapes as light sources, which can bring benefits in terms of more realistic shadows
+						and noise reduction. The sun reflected on the astronaut's helmet is a spherical area light.
+						<br /><br />
+						Our naive implementation of spherical area lights consisted of sampling random points on the sphere, which 
+						resulted in a lot of noise, as half of the samples are usually on the nonvisible hemisphere. 
+						We then implemented cosine hemisphere-based importance sampling, which improved the quality of the images by a lot.
+					 </p>
 				</div>
 			</section>
 			<section class="spotlight">
@@ -119,14 +119,14 @@
 						data-hover-image="images/bunny_independent.jpg" /></div>
 				<div class="content">
 					<h2>Halton Sampler</h2>
-					<p>In order to reduce noise in Monte-Carlo methods on which realistic rendering algorithms are based one can improve upon random sampling
-					   by using low discrepancy sequences i.e sequences that look very uniformly distributed. Of these sequences, the Halton sequence is one of the most
-					   popular. If you want to see for yourself how much better it is than random sampling, you can play around with 
-					   <a href=https://github.com/Thunfischpirat/JuliaPlayground/blob/main/Inference/MonteCarlo.jl>this</a> simulation made by one of the authors using Julia.
-					   <br /><br />
-					   One issue with low discrepancy sequences is that they are not independent, which can lead to aliasing artifacts in the image. By adding random offsets to the sequence 
-					   generated for each pixel we were able to reduce these artifacts to the point where they are not percievable anymore.
-					</p>
+                    <p> To reduce noise in Monte-Carlo methods on which realistic rendering algorithms are based, one can improve upon random sampling
+						by using low discrepancy sequences, i.e., sequences that look uniformly distributed. Of these sequences, the Halton sequence is one of the most
+						popular. If you want to see for yourself how much better it is than random sampling, you can play around with 
+						<a href=https://github.com/Thunfischpirat/JuliaPlayground/blob/main/Inference/MonteCarlo.jl>this</a> simulation made by one of the authors using Julia.
+						<br /><br />
+						One issue with low discrepancy sequences is that they are not independent, which can lead to aliasing artifacts in the image. By adding random offsets to the sequence 
+						generated for each pixel, we reduced these artifacts to the point where they are not perceivable anymore.
+					 </p>
 				</div>
 			</section>
 			<section class="spotlight">
@@ -134,14 +134,14 @@
 						data-hover-image="images/bunny_spheres_denoised.jpg" /></div>
 				<div class="content">
 					<h2>Image Denoising</h2>
-					<p>Using Intel's Open Image Denoise library, which is based on Deep Learning and uses different aspects of the scene 
-					   such as the albedos and normals to denoise a rendered image we were able to basically get rid of all noise in our final rendering
-					   this is especially helpful due to the quadratic relationship between quality of the rendering and the number of samples that need
-					   to be used.
-					   <br /><br />
-					   While the library itself is easily integrated into Lightwave there are some pitfalls when it comes to installing it properly.
-					   In our case the library was not added to the PATH variable, which caused the renderer to crash when trying to use it.
-					</p>
+                    <p>Using Intel's Open Image Denoise library, which is based on Deep Learning and uses different aspects of the scene 
+						, such as the albedos and normals to denoise a rendered image. We were able to essentially eliminate all noise in our final rendering, 
+						which is very helpful due to the quadratic relationship between the quality of the rendering and the number of samples that need
+						to be used. Image denoising can get rid of NaN values, of which there are quite a lot in our unprocessed submission.
+						<br /><br />
+						While the library itself is easily integrated into Lightwave, there are some pitfalls when it comes to installing it properly.
+						In our case, the library was not added to the PATH variable, which caused the renderer to crash when trying to use it.
+					 </p>
 				</div>
 			</section>
 			<section class="spotlight">
@@ -149,34 +149,56 @@
 					data-hover-image="images/cathedral_tm.jpg" /></div>
 				<div class="content">
 					<h2>Tone Mapping</h2>
-					<p>Some scenes are taken under cirumstances where the dynamic range of the scene is much higher than the dynamic range of the display
-					   that is used to view the scene. In order to make the scene viewable on a display the dynamic range of the scene has to be compressed.
-					   This process is called tone mapping. We implemented the Reinhard tone mapping operator, which is a simple and fast tone mapping operator
-					   that is based on the logarithm of the pixel values.
-					   <br /><br />
-					   Although the implementation of the tone mapping operator itself was not very difficult, adapting the scene to make it benefit
-					   from the tone mapping turned out to make the scene not look good w.r.t realism. Thus in the end we decided to not use it.
-					</p>
+                    <p>Some scenes are taken under circumstances where the dynamic range is much higher than the dynamic range of the display
+						used to view the scene. To make the scene viewable on the display, the scene's dynamic range must be compressed.
+						This process is called tone mapping. We implemented the Drago tone mapping operator, a global tone mapping operator
+						based on the logarithm of the pixel values and a bias term that we learnt about in the course "Advanced Image Analysis"
+						at Saaarland University.
+						<br /><br />
+						Although implementing the tone mapping operator itself was relatively easy, adapting the scene to benefit
+						from the tone mapping turned out to make the scene not look good with realism. Thus, in the end, we decided not to use it.
+					 </p>
 				</div>
 			</section>
 			<section class="spotlight">
 				<div class="image"><img src="images/normalmap.jpg" alt="" /></div>
 				<div class="content">
 					<h2>Normal Mapping</h2>
-					<p>To simulate a realistic surface in our scene and get more high quality objects.</p>
+                    <p>Surface normals are an important aspect of calculating shading. Using a position-dependent normal can add an impression
+						of surface detail to a model without changing the model's geometry, thus adding only a little extra computation time.
+						This is called normal mapping. Normal maps give more detail to the stones scattered around in the scene.
+					 </p>
 				</div>
 			</section>
 			<section class="spotlight">
 				<div class="image"><img src="images/add_shader.png" alt="" /></div>
 				<div class="content">
 					<h2>Add & Mix Materials</h2>
-					<p>Many materials, scenery and objects are readily available in Blender, the tool we used to create our scene. 
-					   Unfortunately, the Lightwave renderer does not support all of the materials like the common AddShader and MixShader. <br />
-					   Although in many cases it is possible to work around this issue by rephrasing everything in a Principled BSDF material,
-					   the results is never exactly as the artist intended.
-					   <br /><br />
-					   The main issue in doing this is the lack of documentation on the exporter plugin: there is no mention that the alpha channel
-					   of the image texture is not exported, and the typing hints are only available here and there.
+					<p>Unfortunately, the Lightwave renderer does not support all materials like the common AddShader and MixShader. <br />
+						Although, in many cases, it is possible to work around this issue by rephrasing everything in a Principled BSDF material,
+						the results differ from what the artist intended.
+						<br /><br />
+						The main issue in doing this is the lack of documentation on the exporter plugin: there is no mention that the alpha channel
+						the image texture is not exported, and the typing hints are only available here and there. Nonetheless the support from the 
+						creators of the plugin was very helpful and we encourage future students to modify the plugin to their needs so you can use as much
+						as possible of the Blender features.
+					</p>
+				</div>
+			</section>
+
+			<section id="one" class="wrapper style1 special">
+				<div class="inner">
+					<header class="major">
+						<h2>Sources</h2>
+						<p>
+							<ol style="padding-left: 0; margin-left: 0;">
+								<li style="list-style-position: inside;">PHARR,M.,AND HUMPHREYS,G. Physically-based ray tracing. <a href="https://www.pbrt.org"></a>http://www.pbrt.org/.</li>
+								<li style="list-style-position: inside;">Áfra, Attila T. (2023). Intel® Open Image Denoise. Retrieved from <a href="https://www.openimagedenoise.org">https://www.openimagedenoise.org/.</a></li>
+								<li style="list-style-position: inside;">Peter, Pascal Tobias. Advanced Image Analysis WS22/23 Saarland University Lecutre 4</li>
+								<li style="list-style-position: inside;">Tutorial - <a href="https://www.youtube.com/watch?v=sCbtxg_sOIQ&t=219s">Mars Rover Tracks & Dust Animation in Blender 3.0</a> - Kaizen </li>
+							</ol>
+						</p>
+					</header>
 				</div>
 			</section>
 
