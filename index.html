@@ -119,15 +119,29 @@
 						data-hover-image="images/bunny_independent.jpg" /></div>
 				<div class="content">
 					<h2>Halton Sampler</h2>
-					<p>To limit the noise in our images and obtain a more realistic result in less time.</p>
+					<p>In order to reduce noise in Monte-Carlo methods on which realistic rendering algorithms are based one can improve upon random sampling
+					   by using low discrepancy sequences i.e sequences that look very uniformly distributed. Of these sequences, the Halton sequence is one of the most
+					   popular. If you want to see for yourself how much better it is than random sampling, you can play around with 
+					   <a href=https://github.com/Thunfischpirat/JuliaPlayground/blob/main/Inference/MonteCarlo.jl>this</a> simulation made by one of the authors using Julia.
+					   <br /><br />
+					   One issue with low discrepancy sequences is that they are not independent, which can lead to aliasing artifacts in the image. By adding random offsets to the sequence 
+					   generated for each pixel we were able to reduce these artifacts to the point where they are not percievable anymore.
+					</p>
 				</div>
 			</section>
 			<section class="spotlight">
 				<div class="image"><img src="images/bunny_spheres.jpg" alt=""
 						data-hover-image="images/bunny_spheres_denoised.jpg" /></div>
 				<div class="content">
-					<h2>Intel Open Image Denoiser</h2>
-					<p>To improve the quality of our images and obtain a more realistic result in less time.</p>
+					<h2>Image Denoising</h2>
+					<p>Using Intel's Open Image Denoise library, which is based on Deep Learning and uses different aspects of the scene 
+					   such as the albedos and normals to denoise a rendered image we were able to basically get rid of all noise in our final rendering
+					   this is especially helpful due to the quadratic relationship between quality of the rendering and the number of samples that need
+					   to be used.
+					   <br /><br />
+					   While the library itself is easily integrated into Lightwave there are some pitfalls when it comes to installing it properly.
+					   In our case the library was not added to the PATH variable, which caused the renderer to crash when trying to use it.
+					</p>
 				</div>
 			</section>
 			<section class="spotlight">
@@ -135,7 +149,14 @@
 					data-hover-image="images/cathedral_tm.jpg" /></div>
 				<div class="content">
 					<h2>Tone Mapping</h2>
-					<p>To obtain a realistic result in our images and improve the quality of our images.</p>
+					<p>Some scenes are taken under cirumstances where the dynamic range of the scene is much higher than the dynamic range of the display
+					   that is used to view the scene. In order to make the scene viewable on a display the dynamic range of the scene has to be compressed.
+					   This process is called tone mapping. We implemented the Reinhard tone mapping operator, which is a simple and fast tone mapping operator
+					   that is based on the logarithm of the pixel values.
+					   <br /><br />
+					   Although the implementation of the tone mapping operator itself was not very difficult, adapting the scene to make it benefit
+					   from the tone mapping turned out to make the scene not look good w.r.t realism. Thus in the end we decided to not use it.
+					</p>
 				</div>
 			</section>
 			<section class="spotlight">
