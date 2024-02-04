@@ -40,7 +40,7 @@
 		<!-- Banner -->
 		<section id="banner">
 			<div class="inner">
-				<h2>Haytham</h2>
+				<h2>Frontière Rouge</h2>
 			</div>
 			<a href="#one" class="more scrolly">Learn More</a>
 		</section>
@@ -49,10 +49,35 @@
 		<section id="one" class="wrapper style1 special">
 			<div class="inner">
 				<header class="major">
-					<h2>The Features we developed</h2>
-					<p>In total, we implemented X points worth of features<br />
-						Here below, you will find a showcase for each of them<br />
-						Hover over the images to see the improvement that feature brings to the scene.
+					<h2>Introduction</h2>
+                    <p>Our submission for the rendering competition of the WS23/24 iteration of Computer Graphics I
+                        at Saarland University is called "Frontière Rouge". It was assembled in Blender and rendered
+                        in our fork of the Lightwave renderer called <b>Haytham</b>, named after the medieval Arab father
+                        of modern optics, Ibn al-Haytham.
+                        <br /><br />
+                        This year's competition theme is <b>Journey to the Unknown</b>. For a human to step 
+                        onto Mars is one of the great shared ambitions of our time. The red planet has been a source of wonder
+                        for centuries, and year by year, we come closer to reaching our mysterious neighbor.
+                        The journey to Mars is a journey to the unknown not only because of the largely unexplored environment
+                        of the planet but also because of the scientific and engineering challenges that come with the journey itself.
+                        It is thus a journey not only in terms of distance but also in terms of knowledge gained along the path of its realization.
+                        <br /><br />
+                        For us, the realization of this rendering competition was a journey through the unknown. Along the way, we learned a lot
+                        about physically based rendering, the challenges of implementing a renderer, and the many ways in which we can use Blender to
+                        create beautiful and realistic scenes. Memorable journeys are seldom without difficulties but always full of special
+                        moments; in this regard, our journey was no exception.
+                        <br /><br />
+                        Thus, in the following section, we will present the features of our renderer and the challenges we faced along the way.    
+						<br /><br />
+					</p>
+					<h2>Features & Challenges</h2>
+					<p>Some of you who read this might also be on a journey to implement your own renderer, either here at
+						Saarland University or elsewhere. We would like to share some of the challenges we faced along the way, so that you
+						might be better prepared for your own journey. These challenges are best illustrated by the features we implemented in our renderer
+						that went mostly beyond the scope of the course. We hope that you will find our experiences helpful and appreciate the 
+						visual results we achieved with our renderer.
+					<br /><br />
+					<b>- Andrea Camiletto and Christian Singer</b><br />
 					</p>
 				</header>
 			</div>
@@ -65,7 +90,14 @@
 						data-hover-image="images/perspective_ducks.jpg" /></div>
 				<div class="content">
 					<h2>Thin Lens Camera</h2>
-					<p>To simulate a realistic camera in our scene, and obtain a realistic depth of field.</p>
+					<p>The thin lens camera is one of the simplest camera models. In contrast to the pinhole model it is already able to simulate
+						depth of field effects, which can add a good amount of realism to a scene.
+						<br /><br />
+						One of the challenges with camera models is that to make them even more realistic seems to require an exponential amount of effort.
+						We tried to implement the realistic camera model from <a href=https://pbr-book.org/3ed-2018/Camera_Models/Realistic_Cameras>PBRT</a>,
+					    but we had to give up on it because of the time constraints of the course.
+						We think that the thin lens camera is a good compromise between realism and effort.
+					</p>
 				</div>
 			</section>
 			<section class="spotlight">
@@ -73,7 +105,13 @@
 						data-hover-image="images/bunny_sphere_emission.jpg" /></div>
 				<div class="content">
 					<h2>Area Lights</h2>
-					<p>To simulate realistic light sources in our scene and lower the noise in our images.</p>
+					<p>Area lights are a way to use shapes as light sources, which can bring benefits in terms of more realistic shadows
+					   and noise reduction. The sun you see reflected on the helmet of the astronaut is a spherical area light.
+					   <br /><br />
+					   Our naive implementation of spherical area lights consisted of sampling random points on the sphere, which 
+					   resulted in a lot of noise, as half of the samples are usually on the non visible hemisphere. 
+					   We then implemented cosine hemisphere based importance sampling, which improved the quality of the images by a lot.
+					</p>
 				</div>
 			</section>
 			<section class="spotlight">
@@ -93,7 +131,7 @@
 				</div>
 			</section>
 			<section class="spotlight">
-				<div class="image"></div>><img src="images/cathedral_raw.jpg" alt=""
+				<div class="image"><img src="images/cathedral_raw.jpg" alt=""
 					data-hover-image="images/cathedral_tm.jpg" /></div>
 				<div class="content">
 					<h2>Tone Mapping</h2>
